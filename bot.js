@@ -11,7 +11,10 @@ const API_BASE = 'https://api.sofascore.com/api/v1';
 
 async function getNextGame(teamId) {
     try {
-        const response = await axios.get(`${API_BASE}/team/${teamId}/events/next/0`);
+        const headers = {
+            'User-Agent': 'Mozilla/5.0 (compatible; DiscordBot/1.0)'
+        };
+        const response = await axios.get(`${API_BASE}/team/${teamId}/events/next/0`, { headers });
         if (response.status === 200 && response.data.events && response.data.events.length > 0) {
             const nextEvent = response.data.events[0];
             const tournamentName = nextEvent.tournament.name;
